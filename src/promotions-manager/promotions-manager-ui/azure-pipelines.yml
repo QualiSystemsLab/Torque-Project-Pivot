@@ -1,0 +1,108 @@
+variables:
+  CI: true
+  system.debug: true
+
+jobs:
+- job: Build
+  pool:
+    vmImage: 'Ubuntu 16.04'
+
+  steps:
+
+  # Install dependencies
+  - script: npm install
+    workingDirectory: $(Build.SourcesDirectory)/src/promotions-manager/promotions-manager-ui
+    displayName: 'Install dependencies'
+  
+  - script: npm install --only=dev redux-immutable-state-invariant enzyme@3.8.0 enzyme-adapter-react-16@1.7.1 chai expect jsdom mocha react-addons-test-utils sinon
+    workingDirectory: $(Build.SourcesDirectory)/src/promotions-manager/promotions-manager-ui
+    displayName: 'Install dev dependencies'
+  
+  - script: npm run test:ci
+    workingDirectory: $(Build.SourcesDirectory)/src/promotions-manager/promotions-manager-ui
+    displayName: 'Run unit tests'
+      
+  - script: export REACT_APP_BUILD_NUMBER=$(Build.BuildNumber) && npm run build
+    workingDirectory: $(Build.SourcesDirectory)/src/promotions-manager/promotions-manager-ui
+    displayName: 'Build react app'
+
+  # Publish unit tests
+  - task: PublishTestResults@2
+    continueOnError: true
+    inputs:
+      testResultsFormat: 'JUnit'
+      testResultsFiles: 'test/junit.xml' 
+      searchFolder: '$(Build.SourcesDirectory)/src/promotions-manager/promotions-manager-ui'
+      mergeTestResults: true
+      #testRunTitle: # Optional
+      #buildPlatform: # Optional
+      #buildConfiguration: # Optional
+      #publishRunAttachments: true # Optional
+
+  # Zip build output
+  - task: ArchiveFiles@2
+    inputs:
+      rootFolderOrFile: '$(System.DefaultWorkingDirectory)/src/promotions-manager/promotions-manager-ui/build'
+      archiveType: 'tar'
+      tarCompression: 'gz'
+      archiveFile: '$(Build.ArtifactStagingDirectory)/promotions-manager-ui.$(Build.BuildId).tar.gz'
+
+  # Publish Build Artifact
+  - task: PublishBuildArtifacts@1
+    inputs:
+      artifactName: 'drop'
+      pathtoPublish: '$(Build.ArtifactStagingDirectory)/'      
+
+  # Rename buildid to master
+  - task: PowerShell@2
+    inputs:
+     targetType: 'inline'
+     script: 'Copy-Item -Path "$(Build.ArtifactStagingDirectory)/promotions-manager-ui.$(Build.BuildId).tar.gz" -Destination "$(build.artifactstagingdirectory)/promotions-manager-ui.master.tar.gz"'
+     errorActionPreference: 'stop'
+
+
+  # Publish to S3
+  - task: S3Upload@1
+    inputs:
+     awsCredentials: 'AWS-S3-Connection'
+     regionName: 'eu-west-1'
+     bucketName: 'artifact-repo-promotionapp-alex'
+     sourceFolder: '$(Build.ArtifactStagingDirectory)/'
+     globExpressions: '*master.tar.gz'
+     targetFolder: 'artifacts/latest'
+     logRequest: true
+     logResponse: true
+
+  - task: StartSandbox@0
+    inputs:
+      colonyEndpoint: 'Torque'
+      timeout: '20'
+      space: 'Project-Pivot'
+      blueprint: 'proj-pivot-all-aws'
+      sandbox: 'ADOPipelineReact'
+#      artifacts: 'promotions-manager-ui=artifacts/latest/promotions-manager-ui.master.tar.gz, promotions-manager-api=artifacts/latest/promotions-manager-api.master.tar.gz, mongodb=artifacts/test-data/test-data-db.tar'
+      Inputs: 'PORT=3000, API_PORT=3001, AWS_INSTANCE_TYPE=m5.large, RELEASE_NUMBER=none, API_BUILD_NUMBER=none'
+
+# Publish build artifact to colony artifacts repo
+# - job: UploadArtifactToColonyRepo
+#   pool:
+#     vmImage: 'vs2017-win2016'
+
+#   steps:
+#   - checkout: none  #skip checking out the default repository resource
+#   - task: DownloadPipelineArtifact@0
+#     displayName: 'Download Pipeline Artifacts'
+#     inputs:
+#       artifactName: 'drop'
+#       downloadPath: $(System.DefaultWorkingDirectory)
+
+#   - task: MFelling.AzureStorageUpload.custom-build-task.AzureStorageUpload@0
+#     displayName: 'Upload file Azure Storage'
+#     inputs:
+#       Source: '$(System.DefaultWorkingDirectory)'
+#       Pattern: 'promotions-manager-ui.$(Build.BuildId).zip'
+#       Dest: 'https://colonynjzkmtjjzdfl30067.file.core.windows.net/artifacts/'
+#       DestKey: '$(AzureStorageSecretKey)'
+
+#   dependsOn: Build
+#   condition: succeeded()
