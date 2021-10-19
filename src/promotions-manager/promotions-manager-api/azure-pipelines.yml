@@ -1,7 +1,7 @@
 jobs:
 - job: Build
   pool:
-    vmImage: 'Ubuntu-16.04'
+    vmImage: 'Ubuntu-latest'
 
   steps:
   - task: NodeTool@0
@@ -10,9 +10,11 @@ jobs:
     displayName: 'Install Node.js'
 
   - script: npm install
+    workingDirectory: $(Build.SourcesDirectory)/src/promotions-manager/promotions-manager-api
     displayName: 'npm install'
   
   - script: npm run test:ci
+    workingDirectory: $(Build.SourcesDirectory)/src/promotions-manager/promotions-manager-api
     displayName: 'Run unit tests'
 
   # Publish unit tests
@@ -79,7 +81,7 @@ jobs:
 
 - job: IntegrationTests
   pool:
-    vmImage: 'Ubuntu-16.04'
+    vmImage: 'ubuntu-latest'
 
   steps:
   - task: DownloadBuildArtifacts@0
