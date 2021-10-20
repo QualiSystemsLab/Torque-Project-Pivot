@@ -2,7 +2,7 @@ spec_version: 1
 kind: blueprint
 metadata:
   description: >
-    Deployment of our promotions manager app in Kuberentes
+    Deployment of our promotions manager app in Kubernetes
     
 clouds: 
   - azure/torque-cs

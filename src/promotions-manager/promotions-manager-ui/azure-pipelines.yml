@@ -5,7 +5,7 @@ variables:
 jobs:
 - job: Build
   pool:
-    vmImage: 'Ubuntu 16.04'
+    vmImage: 'ubuntu-latest'
 
   steps:
 
@@ -62,20 +62,20 @@ jobs:
 
 
   # Publish to S3
-  - task: S3Upload@1
-    inputs:
-     awsCredentials: 'AWS-S3-Connection'
-     regionName: 'eu-west-1'
-     bucketName: 'artifact-repo-promotionapp-alex'
-     sourceFolder: '$(Build.ArtifactStagingDirectory)/'
-     globExpressions: '*master.tar.gz'
-     targetFolder: 'artifacts/latest'
-     logRequest: true
-     logResponse: true
+#  - task: S3Upload@1
+#    inputs:
+#     awsCredentials: 'AWS-S3-Connection'
+#     regionName: 'eu-west-1'
+#     bucketName: 'artifact-repo-promotionapp-alex'
+#     sourceFolder: '$(Build.ArtifactStagingDirectory)/'
+#     globExpressions: '*master.tar.gz'
+#     targetFolder: 'artifacts/latest'
+#     logRequest: true
+#     logResponse: true
 
   - task: StartSandbox@0
     inputs:
-      colonyEndpoint: 'Torque'
+      colonyEndpoint: 'Demo Torque'
       timeout: '20'
       space: 'Project-Pivot'
       blueprint: 'proj-pivot-all-aws'
