@@ -2,10 +2,10 @@ spec_version: 1
 kind: blueprint
 metadata:
   description: >
-    All in one deployment of our promotions manager
+    Deployment of our promotions manager web app in a managed AWS Kubernetes (EKS)
     
 clouds: 
-  - AWS 2: us-east-1
+  - AWS 2/ai-eks-compute
   
 artifacts:
   - promotions-manager-ui: artifacts/latest/promotions-manager-ui.master.tar.gz
@@ -15,33 +15,21 @@ artifacts:
 inputs:
 - PORT: 3000
 - API_PORT: 3001
-- AWS_INSTANCE_TYPE: m5.large
 - RELEASE_NUMBER: none
 - API_BUILD_NUMBER: none
 
-applications:
+applications:     
   - promotions-manager-ui:
-      #target: vm1
-      #instance: 3
       input_values:
         - PORT: $PORT
-        - AWS_INSTANCE_TYPE: $AWS_INSTANCE_TYPE
         - API_PORT: $API_PORT
-      #depends_on:
-      #  - promotions-manager-api
-    
-  - promotions-manager-api:      
-      #target: vm1
-      input_values:
+        - API_DNS: $torque.applications.promotions-manager-api.dns
+
+  - promotions-manager-api:
+      input_values:        
         - API_PORT: $API_PORT
-        - AWS_INSTANCE_TYPE: $AWS_INSTANCE_TYPE
-        - DATABASE_HOST: mongodb
+        - DATABASE_HOST: $torque.applications.mongodb.dns
         - RELEASE_NUMBER: $RELEASE_NUMBER
         - API_BUILD_NUMBER: $API_BUILD_NUMBER
-
         
   - mongodb:
-      #target: vm1
-      input_values:
-        - AWS_INSTANCE_TYPE: $AWS_INSTANCE_TYPE
-              

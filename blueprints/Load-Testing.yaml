@@ -2,7 +2,7 @@ spec_version: 1
 kind: blueprint
 metadata:
   description: >
-    All in one deployment of our promotions manager
+    All in one deployment of our promotions manager to AWS with load testing. 
     
 clouds: 
   - AWS 2: us-east-1
@@ -22,7 +22,7 @@ inputs:
 applications:
   - promotions-manager-ui:
       #target: vm1
-      #instance: 3
+      #instances: 3
       input_values:
         - PORT: $PORT
         - AWS_INSTANCE_TYPE: $AWS_INSTANCE_TYPE
