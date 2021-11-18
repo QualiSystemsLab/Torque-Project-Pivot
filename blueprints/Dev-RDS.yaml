@@ -6,7 +6,7 @@ metadata:
   description: >
     Java application with a managed RDS database deployed with TerraForm.
 clouds:
-  - AWS 2: us-east-1
+  - AWS-Dev: us-east-1
 
 # These are the blueprint parameters and their default values.
 # The values can be changed when creating a sandbox based on this

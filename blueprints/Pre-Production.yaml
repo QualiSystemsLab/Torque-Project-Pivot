@@ -2,7 +2,7 @@ spec_version: 1
 kind: blueprint
 metadata:
   description: >
-    All in one deployment of our promotions manager to AWS with load testing. 
+    All in one deployment of our promotions manager on AWS
     
 clouds: 
   - AWS-Dev: us-east-1
@@ -18,28 +18,36 @@ inputs:
 - AWS_INSTANCE_TYPE: m5.large
 - RELEASE_NUMBER: none
 - API_BUILD_NUMBER: none
+- DB_USER: root  # Used to define the db admin account
+- DB_PASS:
+    display_style: masked
+    description: please set the root database password
+    default_value: Torque!123
+  # Used to define the db admin password
+- DB_NAME: demo_db  # DB_NAME - a target database name
 
 applications:
   - promotions-manager-ui:
-      instances: 3
       input_values:
         - PORT: $PORT
         - AWS_INSTANCE_TYPE: $AWS_INSTANCE_TYPE
         - API_PORT: $API_PORT
-      #depends_on:
-      #  - promotions-manager-api
     
-  - promotions-manager-api:     
-      instances: 3 
+  - promotions-manager-api:      
       input_values:
         - API_PORT: $API_PORT
         - AWS_INSTANCE_TYPE: $AWS_INSTANCE_TYPE
-        - DATABASE_HOST: mongodb
+        - DATABASE_HOST: $torque.services.rds-mysql.outputs.hostname
         - RELEASE_NUMBER: $RELEASE_NUMBER
         - API_BUILD_NUMBER: $API_BUILD_NUMBER
 
-        
-  - mongodb:
+services:
+  - rds-mysql:  # One instance of mysql (see: services/rds-mysql/rds-mysql.yaml)
       input_values:
-        - AWS_INSTANCE_TYPE: $AWS_INSTANCE_TYPE
-              
+        - DB_NAME: $DB_NAME
+        - DB_USER: $DB_USER
+        - DB_PASS: $DB_PASS
+        - SANDBOX_ID: $torque.environment.id
+        - VPC_ID: $torque.environment.virtual_network_id  # Sandbox VPC Id
+debugging:
+  bastion_availability: enabled-on
