@@ -10,7 +10,6 @@ clouds:
 artifacts:
   - promotions-manager-ui: artifacts/latest/promotions-manager-ui.master.tar.gz
   - promotions-manager-api: artifacts/latest/promotions-manager-api.master.tar.gz
-  - mongodb: artifacts/test-data/test-data-db.tar
 
 inputs:
 - PORT: 3000
