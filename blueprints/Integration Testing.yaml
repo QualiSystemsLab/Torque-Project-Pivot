@@ -5,7 +5,7 @@ metadata:
     All in one deployment of our promotions manager on AWS
     
 clouds: 
-  - AWS 2: us-east-1
+  - AWS-Dev: us-east-1
   
 artifacts:
   - promotions-manager-ui: artifacts/latest/promotions-manager-ui.master.tar.gz
