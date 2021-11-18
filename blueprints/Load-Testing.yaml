@@ -21,8 +21,7 @@ inputs:
 
 applications:
   - promotions-manager-ui:
-      #target: vm1
-      #instances: 3
+      instances: 3
       input_values:
         - PORT: $PORT
         - AWS_INSTANCE_TYPE: $AWS_INSTANCE_TYPE
@@ -30,8 +29,8 @@ applications:
       #depends_on:
       #  - promotions-manager-api
     
-  - promotions-manager-api:      
-      #target: vm1
+  - promotions-manager-api:     
+      instances: 3 
       input_values:
         - API_PORT: $API_PORT
         - AWS_INSTANCE_TYPE: $AWS_INSTANCE_TYPE
@@ -41,7 +40,6 @@ applications:
 
         
   - mongodb:
-      #target: vm1
       input_values:
         - AWS_INSTANCE_TYPE: $AWS_INSTANCE_TYPE
               
