@@ -40,6 +40,8 @@ applications:
         - DATABASE_HOST: $torque.services.rds-mysql.outputs.hostname
         - RELEASE_NUMBER: $RELEASE_NUMBER
         - API_BUILD_NUMBER: $API_BUILD_NUMBER
+      depends_on: 
+        - rds-mysql
 
 services:
   - rds-mysql:  # One instance of mysql (see: services/rds-mysql/rds-mysql.yaml)
