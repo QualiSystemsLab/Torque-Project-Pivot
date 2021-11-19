@@ -6,6 +6,7 @@ inputs:
 - DATABASE_HOST: mongodb
 - RELEASE_NUMBER: none
 - API_BUILD_NUMBER: none
+- RDS: "false"
 
 infrastructure:
   connectivity:
