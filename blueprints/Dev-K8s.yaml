@@ -5,7 +5,7 @@ metadata:
     Deployment of our promotions manager app in Azure Kubernetes (AKS) 
     
 clouds: 
-  - azure/torque-cs
+  - azure/Sales-AKS-Cluster
   
 artifacts:
   - promotions-manager-ui: artifacts/latest/promotions-manager-ui.master.tar.gz

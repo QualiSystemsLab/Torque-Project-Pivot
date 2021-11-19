@@ -5,7 +5,7 @@ metadata:
     Deployment of our promotions manager app without UI. Only API and DB on the node.
     
 clouds: 
-  - azure/torque-cs
+  - azure/Sales-AKS-Cluster
   
 artifacts:
   - promotions-manager-api-external: artifacts/latest/promotions-manager-api.master.tar.gz
