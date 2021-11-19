@@ -17,7 +17,12 @@ mkdir /var/promotions-manager-api/
 tar -xvf $ARTIFACTS_PATH/drop/drop/promotions-manager-api.*.tar.gz -C /var/promotions-manager-api
 
 echo '==> Set the DATABASE_HOST env var to be globally available'
-DATABASE_HOST=$DATABASE_HOST.$DOMAIN_NAME
+if [ "$RDS" = true ]
+then
+    DATABASE_HOST=$DATABASE_HOST
+else
+    DATABASE_HOST=$DATABASE_HOST.$DOMAIN_NAME
+fi
 echo 'DATABASE_HOST='$DATABASE_HOST >> /etc/environment
 echo 'RELEASE_NUMBER='$RELEASE_NUMBER >> /etc/environment
 echo 'API_BUILD_NUMBER='$API_BUILD_NUMBER >> /etc/environment
