@@ -38,8 +38,8 @@ applications:
         - AWS_INSTANCE_TYPE: $AWS_INSTANCE_TYPE
         - DATABASE_HOST: $torque.services.rds-mysql.outputs.hostname
         - RELEASE_NUMBER: $RELEASE_NUMBER
-        - API_BUILD_NUMBER: $API_BUILD_NUMBER
         - RDS: "true"
+        - API_BUILD_NUMBER: $API_BUILD_NUMBER
       depends_on: 
         - rds-mysql
 
