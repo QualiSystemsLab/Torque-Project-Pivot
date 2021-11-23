@@ -25,6 +25,8 @@ applications:
         - PORT: $PORT
         - API_PORT: $API_PORT
         - API_DNS: $torque.applications.promotions-manager-api.dns
+      depends_on:
+        - promotions-manager-api
 
   - promotions-manager-api:
       input_values:        
@@ -32,5 +34,7 @@ applications:
         - DATABASE_HOST: $torque.applications.mongodb.dns
         - RELEASE_NUMBER: $RELEASE_NUMBER
         - API_BUILD_NUMBER: $API_BUILD_NUMBER
+      depends_on:
+        - mongodb
         
   - mongodb:

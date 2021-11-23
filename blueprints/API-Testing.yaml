@@ -23,6 +23,7 @@ applications:
         - DATABASE_HOST: $torque.applications.mongodb.dns
         - RELEASE_NUMBER: $RELEASE_NUMBER
         - API_BUILD_NUMBER: $API_BUILD_NUMBER
-
+      depends_on:
+        - mongodb
         
   - mongodb:
