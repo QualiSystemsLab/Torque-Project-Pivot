@@ -44,12 +44,13 @@ applications:
         - rds-mysql
 
 services:
-  - rds-mysql:  # One instance of mysql (see: services/rds-mysql/rds-mysql.yaml)
+  - promotions-manager-docdb:
       input_values:
-        - DB_NAME: $DB_NAME
-        - DB_USER: $DB_USER
-        - DB_PASS: $DB_PASS
+        - REGION: us-east-1
+        - ROLE_ARN: PowerUserAccess
+        - ADD_ADMIN_USER: true
+        - USERNAME: $DB_USER
+        - PASSWORD: $DB_PASS
         - SANDBOX_ID: $torque.environment.id
-        - VPC_ID: $torque.environment.virtual_network_id  # Sandbox VPC Id
 debugging:
   bastion_availability: enabled-on
