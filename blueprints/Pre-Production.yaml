@@ -36,12 +36,12 @@ applications:
       input_values:
         - API_PORT: $API_PORT
         - AWS_INSTANCE_TYPE: $AWS_INSTANCE_TYPE
-        - DATABASE_HOST: $torque.services.rds-mysql.outputs.hostname
+        - DATABASE_HOST: $torque.services.promotions-manager-docdb.connection_string
         - RELEASE_NUMBER: $RELEASE_NUMBER
         - RDS: "true"
         - API_BUILD_NUMBER: $API_BUILD_NUMBER
       depends_on: 
-        - rds-mysql
+        - promotions-manager-docdb
 
 services:
   - promotions-manager-docdb:
