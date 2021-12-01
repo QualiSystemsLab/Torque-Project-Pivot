@@ -27,6 +27,9 @@ variables:
 
 outputs:
     - connection_string
+    - endpoint 
+    - cluster_arn
+    - collection_name
 
 permissions:  
   aws:
