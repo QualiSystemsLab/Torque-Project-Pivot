@@ -45,7 +45,6 @@ applications:
         - ENDPOINT: $torque.services.promotions-manager-docdb.outputs.endpoint
         - DATA: "[{'email':'admin','password':'admin'}]"
         - COLLECTION: $torque.services.promotions-manager-docdb.outputs.collection_name
-        - CLUSTER_ARN: $torque.services.promotions-manager-docdb.outputs.cluster_arn
 
       depends_on: 
         - promotions-manager-docdb
