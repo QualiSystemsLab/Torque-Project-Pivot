@@ -9,7 +9,7 @@ clouds:
   
 artifacts:
   - promotions-manager-ui: artifacts/latest/promotions-manager-ui.master.tar.gz
-  - promotions-manager-api: artifacts/latest/promotions-manager-api.master.tar.gz
+  - promotions-manager-api-docdb: artifacts/latest/promotions-manager-api.master.tar.gz
 
 inputs:
 - PORT: 3000
@@ -40,8 +40,8 @@ applications:
         - RELEASE_NUMBER: $RELEASE_NUMBER
         - RDS: "true"
         - API_BUILD_NUMBER: $API_BUILD_NUMBER
-        - DB_USER: $DB_USER
-        - DB_PASS: $DB_PASS
+        - USER: $DB_USER
+        - PASS: $DB_PASS
         - ENDPOINT: $torque.services.promotions-manager-docdb.outputs.endpoint
         - DATA: "[{'email':'admin','password':'admin'}]"
         - COLLECTION: $torque.services.promotions-manager-docdb.outputs.collection_name
