@@ -54,7 +54,7 @@ apt-get install gnupg -y
 wget -qO - https://www.mongodb.org/static/pgp/server-5.0.asc | apt-key add -
 echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/5.0 multiverse" | tee /etc/apt/sources.list.d/mongodb-org-5.0.list
 apt-get update -y
-apt-get install -y mongodb-org
+apt-get install -y mongodb
 echo "mongodb-org hold" | dpkg --set-selections
 echo "mongodb-org-server hold" | dpkg --set-selections
 echo "mongodb-org-shell hold" | dpkg --set-selections
