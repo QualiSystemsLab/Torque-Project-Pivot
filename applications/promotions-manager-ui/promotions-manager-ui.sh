@@ -48,3 +48,5 @@ server {
 	}
 }
 EOF
+
+echo '==> Configuration Complete'
