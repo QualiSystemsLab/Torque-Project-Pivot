@@ -95,12 +95,12 @@ do
 done
 
 # load data to mongodb endpoint
-echo "$DATA" | mongoimport -h $ENDPOINT -u $USER -p $PASSWORD -d $DB -c $COLLECTION --jsonArray
+#echo "$DATA" | mongoimport -h $ENDPOINT -u $USER -p $PASSWORD -d $DB -c $COLLECTION --jsonArray
 
-retVal=$?
-if [ $retVal -ne 0 ]; then
-    echo "Error importing data"
-else
-    echo "Imported data successfully"
-fi
-exit $retVal
+#retVal=$?
+#if [ $retVal -ne 0 ]; then
+#    echo "Error importing data"
+#else
+#    echo "Imported data successfully"
+#fi
+#exit $retVal
