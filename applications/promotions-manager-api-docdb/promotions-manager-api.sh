@@ -8,8 +8,8 @@ echo '==> Installing Node.js and NPM'
 sudo apt-get update
 sudo apt install curl -y
 curl -sL https://deb.nodesource.com/setup_10.x | sudo bash -
-apt install nodejs
-apt install npm
+apt install nodejs -y
+apt install npm -y
 
 echo '==> Extract api artifact to /var/promotions-manager-api'
 mkdir $ARTIFACTS_PATH/drop
