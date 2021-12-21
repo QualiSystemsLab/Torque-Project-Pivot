@@ -9,6 +9,7 @@ sudo apt-get update
 sudo apt install curl -y
 curl -sL https://deb.nodesource.com/setup_10.x | sudo bash -
 apt install nodejs
+apt install npm
 
 echo '==> Extract api artifact to /var/promotions-manager-api'
 mkdir $ARTIFACTS_PATH/drop

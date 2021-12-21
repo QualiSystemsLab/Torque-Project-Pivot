@@ -22,7 +22,7 @@ infrastructure:
     spec:      
       azure:
         vm_size: $AZURE_VM_SIZE
-    aws:
+      aws:
         instance_type: $AWS_INSTANCE_TYPE
 configuration:
   start:
@@ -30,7 +30,7 @@ configuration:
   initialization:
     script: promotions-manager-api.sh
   healthcheck:
-    timeout: 1000
+    timeout: 1500
     wait_for_ports: $API_PORT
 source:
   image:    
