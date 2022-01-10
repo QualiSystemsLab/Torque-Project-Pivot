@@ -1,7 +1,7 @@
 kind: application
 inputs:
 - PORT: 3000
-- API_PORT: 30001
+- API_PORT: 3001
 - AZURE_VM_SIZE: Basic_A1
 - AWS_INSTANCE_TYPE: m5.large
 - API_DNS: ''

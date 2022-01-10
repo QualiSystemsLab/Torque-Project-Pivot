@@ -17,7 +17,7 @@ infrastructure:
     spec:      
       azure:
         vm_size: $AZURE_VM_SIZE
-    aws:
+      aws:
         instance_type: $AWS_INSTANCE_TYPE
 configuration:
   start:
