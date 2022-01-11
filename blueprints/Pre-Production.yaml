@@ -9,7 +9,7 @@ clouds:
   
 artifacts:
   - promotions-manager-ui: artifacts/latest/promotions-manager-ui.master.tar.gz
-  - promotions-manager-api-docdb: artifacts/latest/promotions-manager-api.master.tar.gz
+  - promotions-manager-api: artifacts/latest/promotions-manager-api.master.tar.gz
 
 inputs:
 - PORT: 3000
@@ -22,8 +22,6 @@ inputs:
     display_style: masked
     description: please set the root database password
     default_value: Torque!123
-  # Used to define the db admin password
-- DB_NAME: demo_db  # DB_NAME - a target database name
 
 applications:
   - promotions-manager-ui:
@@ -32,7 +30,10 @@ applications:
         - AWS_INSTANCE_TYPE: $AWS_INSTANCE_TYPE
         - API_PORT: $API_PORT
     
-  - promotions-manager-api-docdb:      
+      depends_on:
+        - promotions-manager-api
+    
+  - promotions-manager-api:      
       input_values:
         - API_PORT: $API_PORT
         - AWS_INSTANCE_TYPE: $AWS_INSTANCE_TYPE
@@ -40,11 +41,6 @@ applications:
         - RELEASE_NUMBER: $RELEASE_NUMBER
         - RDS: "true"
         - API_BUILD_NUMBER: $API_BUILD_NUMBER
-        - USER: $DB_USER
-        - PASS: $DB_PASS
-        - ENDPOINT: $torque.services.promotions-manager-docdb.outputs.endpoint
-        - DATA: "[{'email':'admin','password':'admin'}]"
-        - COLLECTION: $torque.services.promotions-manager-docdb.outputs.collection_name
 
       depends_on: 
         - promotions-manager-docdb
