@@ -72,7 +72,7 @@ echo "Data: $DATA"
 
 echo $OS
 
-# wait until cluster endpoint is listining
+# wait until cluster endpoint is listening
 apt-get install netcat -y
 timeout=600
 wait_interval=5
