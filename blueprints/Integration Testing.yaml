@@ -15,7 +15,9 @@ artifacts:
 inputs:
 - PORT: 3000
 - API_PORT: 3001
-- AWS_INSTANCE_TYPE: m5.large
+- AWS_INSTANCE_TYPE:
+    default_value: m5.large
+    possible_values: ["m5.large", "m5.xlarge", "m6i.large", "m6i.xlarge" ]
 - RELEASE_NUMBER: none
 - API_BUILD_NUMBER: none
 
