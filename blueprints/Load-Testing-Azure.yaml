@@ -1,0 +1,47 @@
+spec_version: 1
+kind: blueprint
+metadata:
+  description: >
+    All in one deployment of our promotions manager to AWS with load testing. 
+    
+clouds: 
+  - azure: eastus
+  
+artifacts:
+  - promotions-manager-ui: artifacts/latest/promotions-manager-ui.master.tar.gz
+  - promotions-manager-api: artifacts/latest/promotions-manager-api.master.tar.gz
+  - mongodb: artifacts/test-data/test-data-db.tar
+
+inputs:
+- PORT: 3000
+- API_PORT: 3001
+- AZURE_VM_SIZE:
+    default_value: Standard_D2_v3
+    possible_values: ["Standard_D2_v3", "Standard_D4_v3", "Standard_D2s_v3", "Standard_D4s_v3" ]
+- RELEASE_NUMBER: none
+- API_BUILD_NUMBER: none
+
+applications:
+  - promotions-manager-ui:
+      instances: 3
+      input_values:
+        - PORT: $PORT
+        - AZURE_VM_SIZE: $AZURE_VM_SIZE
+        - API_PORT: $API_PORT
+      #depends_on:
+      #  - promotions-manager-api
+    
+  - promotions-manager-api:     
+      instances: 3 
+      input_values:
+        - API_PORT: $API_PORT
+        - AWS_INSTANCE_TYPE: $AZURE_VM_SIZE
+        - DATABASE_HOST: mongodb
+        - RELEASE_NUMBER: $RELEASE_NUMBER
+        - API_BUILD_NUMBER: $API_BUILD_NUMBER
+
+        
+  - mongodb:
+      input_values:
+        - AZURE_VM_SIZE: $AZURE_VM_SIZE
+              
