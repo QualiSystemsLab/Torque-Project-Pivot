@@ -5,6 +5,7 @@ image:
   version: latest
   pullPolicy: IfNotPresent
 
+namespace: demos
 # Alternative payment gateway URL
 # Default is https://www.paypal.com
 payment:
