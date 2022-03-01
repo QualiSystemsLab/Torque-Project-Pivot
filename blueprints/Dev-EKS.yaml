@@ -5,7 +5,7 @@ metadata:
     Deployment of our promotions manager web app in a managed AWS Kubernetes (EKS)
     
 clouds: 
-  - AWS-Dev/eks-env
+  - AWS-Dev/eks-demo
 
 artifacts:
   - promotions-manager-ui: artifacts/latest/promotions-manager-ui.master.tar.gz
