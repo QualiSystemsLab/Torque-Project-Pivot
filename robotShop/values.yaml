@@ -5,7 +5,9 @@ image:
   version: latest
   pullPolicy: IfNotPresent
 
-namespace: demos
+#Torque for AKS, Torque-SB for EKS in torquedemo account. 
+namespace: torque-sb
+
 # Alternative payment gateway URL
 # Default is https://www.paypal.com
 payment:
@@ -31,6 +33,6 @@ openshift: false
 
 # Storage class to use with redis statefulset.
 redis:
-  storageClassName: standard
+  storageClassName: gp2
 
 ocCreateRoute: false
