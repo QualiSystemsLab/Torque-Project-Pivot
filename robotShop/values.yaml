@@ -8,6 +8,7 @@ image:
 #Torque for AKS, Torque-SB for EKS in torquedemo account. 
 namespace: torque-sb
 
+hostname: robot-shop
 # Alternative payment gateway URL
 # Default is https://www.paypal.com
 payment:
