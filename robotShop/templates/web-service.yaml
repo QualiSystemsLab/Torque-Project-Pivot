@@ -8,7 +8,6 @@ metadata:
     external-dns.alpha.kubernetes.io/hostname: robot-shop.qualitest.click
     alb.ingress.kubernetes.io/scheme: internet-facing
 spec:
-  ingressClassName: alb
   ports:
   - name: http
     port: 8080
