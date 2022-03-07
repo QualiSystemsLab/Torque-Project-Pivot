@@ -6,6 +6,7 @@ metadata:
     service: web
   annotations:
     external-dns.alpha.kubernetes.io/hostname: {{.Values.hostname}}.qualitest.click
+    external-dns.alpha.kubernetes.io/ttl: "60"
 spec:
   ports:
   - name: http
