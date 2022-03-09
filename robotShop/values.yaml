@@ -10,7 +10,7 @@ namespace: torque-sb
 
 hostname: robot-shop
 
-domain: qualitest.click
+domain: testquali.click
 # Alternative payment gateway URL
 # Default is https://www.paypal.com
 payment:
