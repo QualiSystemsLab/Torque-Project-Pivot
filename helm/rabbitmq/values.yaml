@@ -54,11 +54,11 @@ image:
 
 ## @param nameOverride String to partially override rabbitmq.fullname template (will maintain the release name)
 ##
-nameOverride: "torque-rabbitmq"
+nameOverride: ""
 
 ## @param fullnameOverride String to fully override rabbitmq.fullname template
 ##
-fullnameOverride: "torque-rabbitmq"
+fullnameOverride: ""
 
 ## @param kubeVersion Force target Kubernetes version (using Helm capabilities if not set)
 ##
