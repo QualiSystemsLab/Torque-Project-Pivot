@@ -46,14 +46,14 @@ spring:
 ## The list of ports that your app listens on
 containerPort: 8080
 
-# extraEnv: {}
-extraEnv:
+extraEnv: {}
+# extraEnv:
   ## Extra environment variables to be injected
-  DATABASE_ENGINE: mysql
-  DATABASE_HOST: demodb.cdaluthnnz8h.us-east-1.rds.amazonaws.com
-  # DATABASE_NAME: petclinic
-  DATABASE_USERNAME: petclinic
-  DATABASE_PASSWORD: petclinic
+  # DATABASE_ENGINE: mysql
+  # DATABASE_HOST: demodb.cdaluthnnz8h.us-east-1.rds.amazonaws.com
+  # # DATABASE_NAME: petclinic
+  # DATABASE_USERNAME: petclinic
+  # DATABASE_PASSWORD: petclinic
 
 securityContext: {}
   # runAsUser: 1000
