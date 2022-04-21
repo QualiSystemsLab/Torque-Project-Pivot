@@ -26,6 +26,7 @@ podAnnotations: {}
 spring:
   ## Uncomment if you want to activate a specfic spring profile
   # profile: kubernetes
+  profile: mysql
   ## Ensures that Spring trusts Kubernetes certificate for use with
   ## service discovery, configuration, etc.
   trustKubernetesCertificates: true
@@ -54,6 +55,9 @@ extraEnv:
   DATABASE_NAME: petclinic
   DATABASE_USERNAME: petclinic
   DATABASE_PASSWORD: 1drdNDR7nFvGDXhL
+  MYSQL_URL: "jdbc:mysql://demodb.cdaluthnnz8h.us-east-1.rds.amazonaws.com/petclinic"
+  MYSQL_USER: petclinic
+  MYSQL_PASS: 1drdNDR7nFvGDXhL
 
 securityContext: {}
   # runAsUser: 1000
