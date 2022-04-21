@@ -6,7 +6,7 @@ replicaCount: 1
 
 image:
   repository: paulczar/petclinic
-  tag: 2.1.0.BUILD-SNAPSHOT
+  tag: latest
   pullPolicy: IfNotPresent
 
 nameOverride: ""
