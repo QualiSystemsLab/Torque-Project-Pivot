@@ -51,13 +51,13 @@ containerPort: 8080
 extraEnv:
   ## Extra environment variables to be injected
   DATABASE_ENGINE: mysql
-  DATABASE_HOST: demodb.cdaluthnnz8h.us-east-1.rds.amazonaws.com
-  DATABASE_NAME: petclinic
-  DATABASE_USERNAME: petclinic
-  DATABASE_PASSWORD: 1drdNDR7nFvGDXhL
-  MYSQL_URL: "jdbc:mysql://demodb.cdaluthnnz8h.us-east-1.rds.amazonaws.com/petclinic"
+  # DATABASE_HOST: demodb.cdaluthnnz8h.us-east-1.rds.amazonaws.com
+  # DATABASE_NAME: petclinic
+  # DATABASE_USERNAME: petclinic
+  # DATABASE_PASSWORD: 1drdNDR7nFvGDXhL
+  MYSQL_URL: "jdbc:mysql://db-khqd9uxm9pun.csiophhempvv.us-west-2.rds.amazonaws.com/petclinic"
   MYSQL_USER: petclinic
-  MYSQL_PASS: 1drdNDR7nFvGDXhL
+  MYSQL_PASS: rh116camPchALxhW
 
 securityContext: {}
   # runAsUser: 1000
